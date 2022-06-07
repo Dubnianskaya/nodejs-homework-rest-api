@@ -1,9 +1,9 @@
-const contactsOperations = require("../../models/contacts")
+const {Contact} = require('../../models')
 const createError = require('http-errors')
 
 const removeById = async (req, res) => {
       const {contactId} = req.params;
-      const removedContact = await contactsOperations.removeContact(contactId);
+      const removedContact = await Contact.findByIdAndRemove(contactId);
       if(!removedContact) {
         throw createError(404, `Contact with id ${contactId} not found`)
       }
