@@ -34,10 +34,15 @@ const joiLoginSchema = Joi.object({
   email: Joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'uk', 'ca', 'org'] } })
 })
 
+const joiSubscribtionSchema = Joi.object({
+  subscription: Joi.string().required().valid("starter", "pro", "business")
+})
+
 const User = model("user", userSchema)
 
 module.exports = {
     User,
     joiRegisterSchema,
-    joiLoginSchema
+    joiLoginSchema,
+    joiSubscribtionSchema
 }

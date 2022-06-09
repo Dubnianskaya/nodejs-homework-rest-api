@@ -2,17 +2,17 @@ const express = require('express')
 
 const {contacts: controllers} = require('../../controllers')
 
-const {validation, ctrlWrapper} = require('../../middlewares')
+const {auth, validation, ctrlWrapper} = require('../../middlewares')
 const {contactsSchema, favoriteJoiSchema} = require('../../models')
 const validateMiddlewars = validation(contactsSchema)
 
 const router = express.Router()
 
-router.get('/', ctrlWrapper(controllers.getAll))
+router.get('/', auth, ctrlWrapper(controllers.getAll))
 
 router.get('/:contactId', ctrlWrapper(controllers.getById))
 
-router.post('/', validateMiddlewars, ctrlWrapper(controllers.add))
+router.post('/', auth, validateMiddlewars, ctrlWrapper(controllers.add))
 
 router.delete('/:contactId', ctrlWrapper(controllers.removeById))
 
