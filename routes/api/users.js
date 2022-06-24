@@ -9,5 +9,6 @@ const router = express.Router()
 router.get('/current', auth, ctrlWrapper(controllers.getCurrent))
 router.patch('/', auth, validation(joiSubscribtionSchema), ctrlWrapper(controllers.updateSubscribtion))
 router.patch('/avatars', auth, upload.single('avatar'), ctrlWrapper(controllers.updateAvatar))
+router.get("/verify/:verificationToken", ctrlWrapper(controllers.verifyEmail))
 
 module.exports = router
